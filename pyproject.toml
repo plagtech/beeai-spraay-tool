@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "beeai-spraay-tool"
+version = "0.1.0"
+description = "Spraay Protocol batch payment tool for BeeAI agents — USDC batch payments on Base via the x402 gateway"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Plagtech" }]
+requires-python = ">=3.11,<3.14"
+keywords = ["beeai", "agents", "tools", "payments", "usdc", "base", "x402", "spraay"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
+dependencies = [
+    "beeai-framework>=0.1.85,<0.2",
+    "httpx>=0.27",
+    "pydantic>=2.12.4,<3",
+]
+
+[project.urls]
+Homepage = "https://docs.spraay.app"
+Repository = "https://github.com/plagtech/beeai-spraay-tool"
+
+[dependency-groups]
+dev = [
+    "black>=24.10",
+    "build>=1.2",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+    "ruff>=0.8",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/beeai_spraay_tool"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "examples", "README.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "strict"
+markers = ["unit: fast tests that need no network access"]
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
